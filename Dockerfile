@@ -8,10 +8,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y -q redis-server \
  && apt-get autoremove -y \
  && apt-get clean \
- && rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/debconf/*-old \
- &&  curl -o /usr/bin/envtpl -L https://github.com/appcelerator/envtpl/blob/v1.0.0/envtpl?raw=true \
- && chmod a+x /usr/bin/envtpl && 
-RUN mkdir /data && chown -R redis:redis /data
+ && rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/debconf/*-old
+RUN curl -o /usr/bin/envtpl -L https://github.com/appcelerator/envtpl/blob/v1.0.0/envtpl?raw=true \
+ && chmod a+x /usr/bin/envtpl \
+ && mkdir /data && chown -R redis:redis /data
 EXPOSE 25 143 465 587 993 4190 11334
 COPY run.sh /usr/local/bin
 RUN sed -i "s/127.0.0.1/127.0.0.2/g" /etc/redis/redis.conf
