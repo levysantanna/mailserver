@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x 
 export FQDN
 export DOMAIN
 export VMAILUID
