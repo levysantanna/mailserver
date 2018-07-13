@@ -5,11 +5,11 @@ LABEL description "Simple and full-featured mail server using Docker, with built
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y -q redis-server python-pip \
+RUN apt-get update && apt-get install -y -q redis-server python3-pip \
  && apt-get autoremove -y \
  && apt-get clean \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/debconf/*-old
-RUN pip install envtpl && mkdir /data && chown -R redis:redis /data
+RUN pip3 install envtpl && mkdir /data && chown -R redis:redis /data
 EXPOSE 25 143 465 587 993 4190 11334
 COPY run.sh /usr/local/bin
 RUN sed -i "s/127.0.0.1/127.0.0.2/g" /etc/redis/redis.conf
