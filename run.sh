@@ -200,8 +200,9 @@ fi
 
 # Replace ENV vars
 _envtpl() {
-  mv "$1" "$1.tpl" # envtpl requires files to have .tpl extension
-  envtpl "$1.tpl"
+  # mv "$1" "$1.tpl" # envtpl requires files to have .tpl extension
+  # envtpl "$1.tpl"
+  mv "$1" "$1.tpl" && envtpl "$1.tpl" > "$1" && rm -f "$1.tpl"
 }
 
 _envtpl /etc/postfix/main.cf
